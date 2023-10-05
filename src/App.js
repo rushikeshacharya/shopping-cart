@@ -5,18 +5,23 @@ import "./App.css";
 
 import { Container, Row, Col } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
+
 import BuyPage from "./Components/BuyPage";
 import Cart from "./Components/Cart";
 
 function App() {
   const [cartItem, setCartItem] = useState([]);
 
-  const addInCart = (item) => {
-    const isAleadyAdded = cartItem.findIndex(function (arr) {
-      return arr.id === item.id;
+  const addInCart = item => {
+    const isAlreadyAdded = cartItem.findIndex(function(array) {
+      return array.id === item.id;
     });
-    if (isAleadyAdded !== -1) {
-      toast("Already added in cart", { type: "error" });
+
+    if (isAlreadyAdded !== -1) {
+      toast("already added in cart", {
+        type: "error"
+      });
+      return;
     }
 
     setCartItem([...cartItem, item]);
@@ -24,14 +29,16 @@ function App() {
 
   const buyNow = () => {
     setCartItem([]);
+
     toast("Purchase Complete", {
-      type: "success",
+      type: "success"
     });
   };
 
-  const removeItem = (item) => {
-    setCartItem(cartItem.filter((singleItem) => singleItem.id !== item.id));
+  const removeItem = item => {
+    setCartItem(cartItem.filter(singleItem => singleItem.id !== item.id));
   };
+
   return (
     <Container fluid>
       <ToastContainer />
